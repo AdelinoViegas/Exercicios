@@ -234,10 +234,7 @@ if(isset($_POST['btn-expression'])){
         font-family: sans-serif;
         text-align: center;
       }
-
-
    </style>
-     
 </head>
 <body>
 
