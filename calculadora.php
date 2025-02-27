@@ -36,10 +36,8 @@ class Calculator{
 		   } 	  	  
 	}
 
-
 	public function Validate(){
-
-	$this->character_invalid = "=!@#$%¨&*()_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwyz?<>~çÇ:;,{}[]`´";
+		$this->character_invalid = "=!@#$%¨&*()_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwyz?<>~çÇ:;,{}[]`´";
 
     for($i=0; $i < strlen($this->filter_expression); $i++){
        if( str_contains($this->character_invalid,$this->filter_expression[$i])){
@@ -54,16 +52,11 @@ class Calculator{
      } 
 	}
 
-
 public function Calculate(){
    $this->text_expression = $this->validate_expression;
-
-
    if($this->valid_math_expression === true){
  
-
   for($i=0; $i<strlen($this->text_expression); $i++){    
-
       if($this->text_expression[$i] === '+'){
         $this->operator_array[] = $this->text_expression[$i];
       }elseif($this->text_expression[$i] === '-'){
@@ -94,9 +87,7 @@ public function Calculate(){
          $this->text_expression = str_replace('/',' ',$this->text_expression);
        }   
     }
-
-
-         
+     
    $this->array_number = explode(' ',$this->text_expression);
 
    for($i=0; $i < count($this->array_number); $i++){
