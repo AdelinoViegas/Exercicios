@@ -1,6 +1,4 @@
 <?php 
-
-
 class Calculator{
 
 	private $expression; 
@@ -17,17 +15,16 @@ class Calculator{
 		$this->expression = $expression;
     }
 
-    public function getResult(){
-    	return $this->result;
-    }
+	public function getResult(){
+		return $this->result;
+	}
 
-    public function getValidate_Expression(){
-    	return $this->validate_expression;
-    }
-
+	public function getValidate_Expression(){
+		return $this->validate_expression;
+	}
 
 	public function filter(){
-		     /*Eliminar os espaços da string*/   
+			 /*Eliminar os espaços da string*/   
 		   for($i=0; $i<strlen($this->expression); $i++){
 		        if($this->expression[$i] !== ' '){
 		         $this->filter_expression .= $this->expression[$i];
@@ -36,14 +33,13 @@ class Calculator{
 
 		   if($this->filter_expression === null){
 		   	   $this->filter_expression = 'Null';
-		   }
-		  	  	  
+		   } 	  	  
 	}
 
 
 	public function Validate(){
 
-    $this->character_invalid = "=!@#$%¨&*()_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwyz?<>~çÇ:;,{}[]`´";
+	$this->character_invalid = "=!@#$%¨&*()_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwyz?<>~çÇ:;,{}[]`´";
 
     for($i=0; $i < strlen($this->filter_expression); $i++){
        if( str_contains($this->character_invalid,$this->filter_expression[$i])){
@@ -56,12 +52,10 @@ class Calculator{
       }
 
      } 
-
 	}
 
 
 public function Calculate(){
-
    $this->text_expression = $this->validate_expression;
 
 
@@ -156,7 +150,6 @@ public function Calculate(){
 }
 
 
-
 if(isset($_POST['btn-expression'])){
    $calculo = new Calculator($_POST['expression']);	
    $calculo->filter();
@@ -168,9 +161,7 @@ if(isset($_POST['btn-expression'])){
 
 
  ?>
-
-
-
+	
 <!DOCTYPE html>
 <html lang="pt">
 <head>
