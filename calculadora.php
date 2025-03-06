@@ -48,7 +48,6 @@ class Calculator{
          $this->validate_expression .= $this->filter_expression[$i];    
          $this->valid_math_expression = true;
       }
-
      } 
 	}
 
@@ -96,15 +95,12 @@ public function Calculate(){
 
 
   if(isset($this->operator_array) && !($this->array_number[0] === '') ){
-
     for($i=0; $i<count($this->operator_array); $i++){
-
       if($this->operator_array[$i] === '+'){
            $this->result = $this->array_number[$i] + $this->array_number[$i+1];
            $this->array_number[$i+1] = $this->result;
       }
 
-    
       if($this->operator_array[$i] === '/'){
             
           try{ 
@@ -126,20 +122,16 @@ public function Calculate(){
            $this->result = $this->array_number[$i] * $this->array_number[$i+1];
                $this->array_number[$i+1] = $this->result;
       }  
-
    }
      $this->validate_expression = $this->result;
 
   }else{
     $this->result = $this->validate_expression;
   }
-
 }
 
 	}
-
 }
-
 
 if(isset($_POST['btn-expression'])){
    $calculo = new Calculator($_POST['expression']);	
@@ -147,9 +139,6 @@ if(isset($_POST['btn-expression'])){
    $calculo->Validate();
    $calculo->Calculate();
 }
-
-
-
 
  ?>
 	
