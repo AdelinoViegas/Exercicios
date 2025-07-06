@@ -2,10 +2,10 @@
 class Calculator{
 
 	private $expression; 
-	private $filter_expression;
-	private $validate_expression;
-	private $character_invalid = [];
-	private $valid_math_expression;
+  private $filter_expression;
+  private $validate_expression;
+  private $character_invalid = [];
+  private $valid_math_expression;
   private $operator_array;
   private $array_number;
   private $result;
