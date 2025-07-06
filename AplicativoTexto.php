@@ -123,8 +123,7 @@ for($i=0; $i < strlen($letters); $i++){
 	</span>	
 </p>
 
-<p>
-	Primeira letra:
+<p> Primeira letra:
 	<span> 
      <?php if(isset($letter_first)){ 
 	  	echo $letter_first;
@@ -135,9 +134,7 @@ for($i=0; $i < strlen($letters); $i++){
     </span>
 </p>
 
-<p>
-	
-	Segunda letra: 
+<p> Segunda letra: 
 	<span>
      <?php if(isset($letter_last)){ 
 	  	echo $letter_last;
@@ -150,7 +147,3 @@ for($i=0; $i < strlen($letters); $i++){
 
 </body>
 </html>
-
-
-
-	
