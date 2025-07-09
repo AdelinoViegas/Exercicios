@@ -226,28 +226,24 @@ if(isset($_POST['btn-expression'])){
    </style>
 </head>
 <body>
+  <form action="" method="post" class="calculator">
+    <h2 class="calculator__title">Calculadora</h2>
 
-   <form action="" method="post">
-        <h2>Calculadora</h2>
-      <p>
-        <label>Digite uma expressão válida:</label>
-        <input type="text" name="expression" value="<?php
-            	if(isset($calculo)){
-                 echo $calculo->getValidate_Expression();
-              }
-        ?>"required> 
-      </p>
-      <p>
-        <label>Resultado:</label>
-        <input type="text" name="result" value="<?php
-            if(isset($calculo)){   
-               echo $calculo->getResult();
-            }  
-         ?>"> 
-      </p>
-      <P>
-        <input type="submit" name="btn-expression" value="Calcular">
-      </P>
-   </form>
+    <div class="calculator__field">
+      <label class="calculator__label">Digite uma expressão válida:</label>
+      <input type="text" name="expression" class="calculator__input" required
+        value="<?= $calculator->getValidatedExpression() ?? '' ?>">
+    </div>
+
+    <div class="calculator__field">
+      <label class="calculator__label">Resultado:</label>
+      <input type="text" name="result" class="calculator__input"
+        value="<?= $calculator->getResult() ?? '' ?>" readonly>
+    </div>
+
+    <div>
+      <input type="submit" name="btn-expression" value="Calcular" class="calculator__submit">
+    </div>
+  </form>
 </body>
 </html>
