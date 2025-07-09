@@ -1,145 +1,81 @@
 <?php 
-class Calculator{
+  class Calculator {
+      private string $expression;
+      private string $filteredExpression = '';
+      private string $validatedExpression = '';
+      private array $invalidChars = '=!@#$%¨&*()_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwyz?<>~çÇ:;,{}[]`´';
+      private bool $isValid = true;
+      private array $operators = [];
+      private array $numbers = [];
+      private float|string $result = 0;
 
-	private $expression; 
-  private $filter_expression;
-  private $validate_expression;
-  private $character_invalid = [];
-  private $valid_math_expression;
-  private $operator_array;
-  private $array_number;
-  private $result;
-  private $text_expression;
-
-	public function __construct($expression){
-		$this->expression = $expression;
-    }
-
-	public function getResult(){
-		return $this->result;
-	}
-
-	public function getValidate_Expression(){
-		return $this->validate_expression;
-	}
-
-	public function filter(){
-			 /*Eliminar os espaços da string*/   
-		   for($i=0; $i<strlen($this->expression); $i++){
-		        if($this->expression[$i] !== ' '){
-		         $this->filter_expression .= $this->expression[$i];
-		        }
-		   }
-
-		   if($this->filter_expression === null){
-		   	   $this->filter_expression = 'Null';
-		   } 	  	  
-	}
-
-	public function Validate(){
-		$this->character_invalid = "=!@#$%¨&*()_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwyz?<>~çÇ:;,{}[]`´";
-
-    for($i=0; $i < strlen($this->filter_expression); $i++){
-       if( str_contains($this->character_invalid,$this->filter_expression[$i])){
-           $this->valid_math_expression = false;
-      	   $this->result = "Expressão inválida";
-      	   break;
-      }else{
-         $this->validate_expression .= $this->filter_expression[$i];    
-         $this->valid_math_expression = true;
-      }
-     } 
-	}
-
-public function Calculate(){
-   $this->text_expression = $this->validate_expression;
-   if($this->valid_math_expression === true){
- 
-  for($i=0; $i<strlen($this->text_expression); $i++){    
-      if($this->text_expression[$i] === '+'){
-        $this->operator_array[] = $this->text_expression[$i];
-      }elseif($this->text_expression[$i] === '-'){
-        $this->operator_array[] = $this->text_expression[$i];
-      }elseif($this->text_expression[$i] === 'x'){        
-        $this->operator_array[] = $this->text_expression[$i];
-      }elseif($this->text_expression[$i] === '/'){
-        $this->operator_array[] = $this->text_expression[$i];
-      }
-    } 
-
-
-  for($i=0; $i<strlen($this->text_expression); $i++){   
-
-      if($this->text_expression[$i] === '+'){
-         $this->text_expression = str_replace('+',' ',$this->text_expression);
+      public function __construct(string $expression) {
+          $this->expression = $expression;
       }
 
-      if($this->text_expression[$i] === '-'){
-         $this->text_expression = str_replace('-',' ',$this->text_expression);
+      public function getResult(): float|string {
+          return $this->result;
       }
 
-      if($this->text_expression[$i] === 'x'){
-        $this->text_expression = str_replace('x',' ',$this->text_expression);
+      public function getValidatedExpression(): string {
+          return $this->validatedExpression;
       }
 
-      if($this->text_expression[$i] === '/'){
-         $this->text_expression = str_replace('/',' ',$this->text_expression);
-       }   
-    }
-     
-   $this->array_number = explode(' ',$this->text_expression);
-
-   for($i=0; $i < count($this->array_number); $i++){
-       $this->array_number[$i] = (float)$this->array_number[$i];         
-   }
-
-
-  if(isset($this->operator_array) && !($this->array_number[0] === '') ){
-    for($i=0; $i<count($this->operator_array); $i++){
-      if($this->operator_array[$i] === '+'){
-           $this->result = $this->array_number[$i] + $this->array_number[$i+1];
-           $this->array_number[$i+1] = $this->result;
-      }
-
-      if($this->operator_array[$i] === '/'){
-            
-          try{ 
-	          $this->result = $this->array_number[$i] / $this->array_number[$i+1];
-	          $this->array_number[$i+1] = $this->result;
-          }catch(DivisionByZeroError $error){
-             $this->result = "Erro de divisão";
-             break;
+      public function filter(): void {
+          $this->filteredExpression = str_replace(' ', '', $this->expression);
+          if ($this->filteredExpression === '') {
+              $this->filteredExpression = 'Null';
           }
       }
 
-      if($this->operator_array[$i] === '-'){
-
-           $this->result = $this->array_number[$i] - $this->array_number[$i+1];
-               $this->array_number[$i+1] = $this->result;
+      public function validate(): void {
+          for ($i = 0; $i < strlen($this->filteredExpression); $i++) {
+              $char = $this->filteredExpression[$i];
+              if (str_contains($this->invalidChars, $char)) {
+                  $this->isValid = false;
+                  $this->result = "Expressão inválida";
+                  return;
+              }
+              $this->validatedExpression .= $char;
+          }
       }
 
-      if($this->operator_array[$i] === 'x'){
-           $this->result = $this->array_number[$i] * $this->array_number[$i+1];
-               $this->array_number[$i+1] = $this->result;
-      }  
-   }
-     $this->validate_expression = $this->result;
+      public function calculate(): void {
+          if (!$this->isValid) return;
 
-  }else{
-    $this->result = $this->validate_expression;
+          $expression = str_replace(['+', '-', 'x', '/'], ' ', $this->validatedExpression);
+          $this->numbers = array_map('floatval', explode(' ', $expression));
+
+          preg_match_all('/[\+\-x\/]/', $this->validatedExpression, $matches);
+          $this->operators = $matches[0];
+
+          if (empty($this->numbers) || empty($this->operators)) {
+              $this->result = "Expressão incompleta";
+              return;
+          }
+
+          $this->result = $this->numbers[0];
+          for ($i = 0; $i < count($this->operators); $i++) {
+              $next = $this->numbers[$i + 1] ?? 0;
+              switch ($this->operators[$i]) {
+                  case '+': $this->result += $next; break;
+                  case '-': $this->result -= $next; break;
+                  case 'x': $this->result *= $next; break;
+                  case '/':
+                      $this->result = $next == 0 ? "Erro de divisão" : $this->result / $next;
+                      break;
+              }
+              if (!is_numeric($this->result)) break;
+          }
+      }
   }
-}
 
-	}
-}
-
-if(isset($_POST['btn-expression'])){
-   $calculo = new Calculator($_POST['expression']);	
-   $calculo->filter();
-   $calculo->Validate();
-   $calculo->Calculate();
-}
-
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $calculator = new Calculator($_POST['expression']);
+      $calculator->filter();
+      $calculator->validate();
+      $calculator->calculate();
+  }
  ?>
 	
 <!DOCTYPE html>
