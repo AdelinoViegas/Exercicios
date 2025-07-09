@@ -148,82 +148,79 @@ if(isset($_POST['btn-expression'])){
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>calculadora</title>
-    <style>
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    	*{
-    		margin: 0;
-    		padding:0;
-    		box-sizing:border-box;
-    	}
-      
-      body{
-        background-color: rgb(104,133,249);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height:100vh;
-      }
+    body {
+      background-color: #6885f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+    }
 
-      form{
-         display: inline-block;
-         background-color: rgb(3,18,78);
-         padding: 30px;
-         border-radius:5px;
-         color:#fff;
-       }
+    /* Calculator Form */
+    .calculator {
+      background-color: #03124e;
+      padding: 30px;
+      border-radius: 8px;
+      color: #fff;
+      width: 100%;
+      max-width: 400px;
+    }
 
-       label{
-         font-family: sans-serif;
-       }
+    .calculator__title {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-      input[name='expression'],input[name='result']{
-           width:250px;
-           height:30px;
-           padding: 4px;
-           font-size:26px;
-           background: rgb(6,37,162);
-           color:#fff;
-           outline:none;
-           border:1px solid blue;
-      }	
+    .calculator__field {
+      margin-bottom: 20px;
+    }
 
-      input[type='submit']{
-        border-radius:4px;
-        width:100%;
-        height:50px;
-        font-size:24px;
-        font-weight:bold;
-        background-color: rgb(255,255,255);
-        cursor:pointer;
-        transition: .3s;
-      }
+    .calculator__label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
 
-      input[type='submit']:hover{
-        background-color: rgb(230,230,230);      
-      }
+    .calculator__input {
+      width: 100%;
+      height: 45px;
+      padding: 8px;
+      font-size: 20px;
+      background-color: #0625a2;
+      color: #fff;
+      border: 1px solid #0050ff;
+      border-radius: 4px;
+      outline: none;
+    }
 
-     input[type='text']{
-        padding:10px 6px;
-        height:50px;
-        width: 350px;
-        
-      }
+    /* Submit Button */
+    .calculator__submit {
+      width: 100%;
+      height: 50px;
+      font-size: 22px;
+      font-weight: bold;
+      background-color: #fff;
+      color: #03124e;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
 
-      p{
-        display: flex;
-        row-gap:10px;
-        flex-direction:column;
-        font-weight: bold;
-        font-size:20px;
-        margin: 20px 0px;
-      }
+    .calculator__submit:hover {
+      background-color: #ddd;
+    }
 
-
-      h2{
-        font-family: sans-serif;
-        text-align: center;
-      }
-   </style>
+  </style>
 </head>
 <body>
   <form action="" method="post" class="calculator">
