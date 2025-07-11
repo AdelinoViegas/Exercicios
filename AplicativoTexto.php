@@ -1,5 +1,4 @@
 <?php 
-
 	class TextAnalyzer
 	{
 			private string $rawText;
