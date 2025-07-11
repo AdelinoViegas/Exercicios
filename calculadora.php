@@ -101,7 +101,6 @@
       font-family: sans-serif;
     }
 
-    /* Calculator Form */
     .calculator {
       background-color: #03124e;
       padding: 30px;
@@ -155,7 +154,6 @@
     .calculator__submit:hover {
       background-color: #ddd;
     }
-
   </style>
 </head>
 <body>
