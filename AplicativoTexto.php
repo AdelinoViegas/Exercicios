@@ -1,6 +1,5 @@
 <?php 
-	class TextAnalyzer
-	{
+	class TextAnalyzer {
 			private string $rawText;
 			private string $normalizedText = '';
 			private int $letterCount = 0;
@@ -10,14 +9,12 @@
 			private int $maxFrequency = 0;
 			private string $letters = 'abcdefghijklmnopqrstuvwxyzãáàçéêíõóú';
 
-			public function __construct(string $text)
-			{
+			public function __construct(string $text) {
 					$this->rawText = trim($text);
 					$this->analyze();
 			}
 
-			private function analyze(): void
-			{
+			private function analyze(): void {
 					$cleanText = str_replace(' ', '', $this->rawText);
 					$this->normalizedText = $cleanText;
 					$this->letterCount = strlen($cleanText);
@@ -41,8 +38,7 @@
 					}
 			}
 
-			public function getData(): array
-			{
+			public function getData(): array {
 					return [
 							'letterCount' => $this->letterCount,
 							'firstLetter' => $this->firstLetter,
